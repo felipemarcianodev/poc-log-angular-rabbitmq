@@ -1,0 +1,15 @@
+{
+    "query": {
+      "bool": {
+        "must": [
+          { "term": { "event": "APPLICATION_ERROR" } },
+          { "range": { "@timestamp": { "gte": "now-1d" } } }
+        ]
+      }
+    },
+    "aggs": {
+      "errors_by_user": {
+        "terms": { "field": "userId", "size": 10 }
+      }
+    }
+  }

@@ -1,0 +1,120 @@
+{
+    "version": "8.11.0",
+    "objects": [
+      {
+        "id": "user-actions-dashboard",
+        "type": "dashboard",
+        "namespaces": ["default"],
+        "attributes": {
+          "title": "User Actions Dashboard",
+          "hits": 0,
+          "description": "Monitor user behavior, page visits, purchases and interactions",
+          "panelsJSON": "[{\"version\":\"8.11.0\",\"gridData\":{\"x\":0,\"y\":0,\"w\":24,\"h\":15,\"i\":\"1\"},\"panelIndex\":\"1\",\"embeddableConfig\":{},\"panelRefName\":\"panel_1\"},{\"version\":\"8.11.0\",\"gridData\":{\"x\":24,\"y\":0,\"w\":24,\"h\":15,\"i\":\"2\"},\"panelIndex\":\"2\",\"embeddableConfig\":{},\"panelRefName\":\"panel_2\"},{\"version\":\"8.11.0\",\"gridData\":{\"x\":0,\"y\":15,\"w\":16,\"h\":15,\"i\":\"3\"},\"panelIndex\":\"3\",\"embeddableConfig\":{},\"panelRefName\":\"panel_3\"},{\"version\":\"8.11.0\",\"gridData\":{\"x\":16,\"y\":15,\"w\":16,\"h\":15,\"i\":\"4\"},\"panelIndex\":\"4\",\"embeddableConfig\":{},\"panelRefName\":\"panel_4\"},{\"version\":\"8.11.0\",\"gridData\":{\"x\":32,\"y\":15,\"w\":16,\"h\":15,\"i\":\"5\"},\"panelIndex\":\"5\",\"embeddableConfig\":{},\"panelRefName\":\"panel_5\"},{\"version\":\"8.11.0\",\"gridData\":{\"x\":0,\"y\":30,\"w\":48,\"h\":15,\"i\":\"6\"},\"panelIndex\":\"6\",\"embeddableConfig\":{},\"panelRefName\":\"panel_6\"}]",
+          "optionsJSON": "{\"useMargins\":true,\"syncColors\":false,\"syncCursor\":true,\"syncTooltips\":false,\"hidePanelTitles\":false}",
+          "version": 1,
+          "timeRestore": false,
+          "timeTo": "now",
+          "timeFrom": "now-24h",
+          "refreshInterval": {
+            "pause": false,
+            "value": 60000
+          },
+          "kibanaSavedObjectMeta": {
+            "searchSourceJSON": "{\"query\":{\"match_all\":{}},\"filter\":[]}"
+          }
+        },
+        "references": [
+          {
+            "name": "panel_1",
+            "type": "visualization",
+            "id": "top-pages"
+          },
+          {
+            "name": "panel_2",
+            "type": "visualization",
+            "id": "user-activity-heatmap"
+          },
+          {
+            "name": "panel_3",
+            "type": "visualization", 
+            "id": "purchase-events"
+          },
+          {
+            "name": "panel_4",
+            "type": "visualization",
+            "id": "active-users"
+          },
+          {
+            "name": "panel_5",
+            "type": "visualization",
+            "id": "session-duration"
+          },
+          {
+            "name": "panel_6",
+            "type": "visualization",
+            "id": "user-journey"
+          }
+        ]
+      },
+      {
+        "id": "top-pages",
+        "type": "visualization",
+        "namespaces": ["default"],
+        "attributes": {
+          "title": "Most Visited Pages",
+          "visState": "{\"title\":\"Most Visited Pages\",\"type\":\"pie\",\"aggs\":[{\"id\":\"1\",\"type\":\"count\",\"params\":{},\"schema\":\"metric\"},{\"id\":\"2\",\"type\":\"terms\",\"params\":{\"field\":\"page\",\"size\":10,\"order\":\"desc\",\"orderBy\":\"1\"},\"schema\":\"segment\"}]}",
+          "uiStateJSON": "{}",
+          "description": "Shows distribution of page visits",
+          "version": 1,
+          "kibanaSavedObjectMeta": {
+            "searchSourceJSON": "{\"index\":\"user-logs-*\",\"query\":{\"bool\":{\"must\":[{\"term\":{\"eventName\":\"page_view\"}}]}},\"filter\":[]}"
+          }
+        }
+      },
+      {
+        "id": "user-activity-heatmap",
+        "type": "visualization",
+        "namespaces": ["default"],
+        "attributes": {
+          "title": "User Activity Heatmap",
+          "visState": "{\"title\":\"User Activity Heatmap\",\"type\":\"heatmap\",\"aggs\":[{\"id\":\"1\",\"type\":\"count\",\"params\":{},\"schema\":\"metric\"},{\"id\":\"2\",\"type\":\"date_histogram\",\"params\":{\"field\":\"timestamp\",\"interval\":\"1h\"},\"schema\":\"segment\"},{\"id\":\"3\",\"type\":\"terms\",\"params\":{\"field\":\"eventName\",\"size\":10},\"schema\":\"group\"}]}",
+          "uiStateJSON": "{}",
+          "description": "Heatmap of user activity by time and event type",
+          "version": 1,
+          "kibanaSavedObjectMeta": {
+            "searchSourceJSON": "{\"index\":\"user-logs-*\",\"query\":{\"match_all\":{}},\"filter\":[]}"
+          }
+        }
+      },
+      {
+        "id": "purchase-events",
+        "type": "visualization",
+        "namespaces": ["default"],
+        "attributes": {
+          "title": "Purchase Events",
+          "visState": "{\"title\":\"Purchase Events\",\"type\":\"metric\",\"aggs\":[{\"id\":\"1\",\"type\":\"count\",\"params\":{},\"schema\":\"metric\"}]}",
+          "uiStateJSON": "{}",
+          "description": "Total purchase events count",
+          "version": 1,
+          "kibanaSavedObjectMeta": {
+            "searchSourceJSON": "{\"index\":\"user-logs-*\",\"query\":{\"bool\":{\"should\":[{\"term\":{\"eventName\":\"purchase\"}},{\"term\":{\"eventName\":\"checkout\"}}]}},\"filter\":[]}"
+          }
+        }
+      },
+      {
+        "id": "active-users",
+        "type": "visualization",
+        "namespaces": ["default"],
+        "attributes": {
+          "title": "Active Users",
+          "visState": "{\"title\":\"Active Users\",\"type\":\"metric\",\"aggs\":[{\"id\":\"1\",\"type\":\"cardinality\",\"params\":{\"field\":\"userId\"},\"schema\":\"metric\"}]}",
+          "uiStateJSON": "{}",
+          "description": "Unique active users count",
+          "version": 1,
+          "kibanaSavedObjectMeta": {
+            "searchSourceJSON": "{\"index\":\"user-logs-*\",\"query\":{\"match_all\":{}},\"filter\":[]}"
+          }
+        }
+      }
+    ]
+  }

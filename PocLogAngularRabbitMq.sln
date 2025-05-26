@@ -3,12 +3,12 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.13.35931.197
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PocLogAngularRabbitMq.API", "PocLogAngularRabbitMq.API\PocLogAngularRabbitMq.API.csproj", "{B57DE989-4747-490B-941D-9E5477CB59D8}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8EC462FD-D22E-90A8-E5CE-7E832BA40C5D}"
 	ProjectSection(SolutionItems) = preProject
 		Readme.md = Readme.md
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PocLogAngularRabbitMq.API", "backend\PocLogAngularRabbitMq.API.csproj", "{C93A7049-409F-9AA8-81FF-BB3D4A4235A9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -16,10 +16,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{B57DE989-4747-490B-941D-9E5477CB59D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B57DE989-4747-490B-941D-9E5477CB59D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B57DE989-4747-490B-941D-9E5477CB59D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B57DE989-4747-490B-941D-9E5477CB59D8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C93A7049-409F-9AA8-81FF-BB3D4A4235A9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C93A7049-409F-9AA8-81FF-BB3D4A4235A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C93A7049-409F-9AA8-81FF-BB3D4A4235A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C93A7049-409F-9AA8-81FF-BB3D4A4235A9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

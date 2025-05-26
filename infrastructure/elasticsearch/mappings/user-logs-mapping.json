@@ -1,0 +1,244 @@
+# user-logs-mapping.json
+{
+  "mappings": {
+    "properties": {
+      "userId": {
+        "type": "keyword",
+        "index": true
+      },
+      "sessionId": {
+        "type": "keyword",
+        "index": true
+      },
+      "eventName": {
+        "type": "keyword",
+        "index": true
+      },
+      "page": {
+        "type": "keyword",
+        "index": true
+      },
+      "timestamp": {
+        "type": "date",
+        "format": "strict_date_optional_time||epoch_millis"
+      },
+      "data": {
+        "type": "object",
+        "enabled": true,
+        "properties": {
+          "error": {
+            "type": "text",
+            "analyzer": "standard"
+          },
+          "stackTrace": {
+            "type": "text",
+            "index": false
+          },
+          "duration": {
+            "type": "long"
+          },
+          "url": {
+            "type": "keyword"
+          },
+          "component": {
+            "type": "keyword"
+          },
+          "metadata": {
+            "type": "object",
+            "enabled": true
+          }
+        }
+      },
+      "userAgent": {
+        "type": "text",
+        "analyzer": "standard",
+        "fields": {
+          "keyword": {
+            "type": "keyword",
+            "ignore_above": 256
+          }
+        }
+      },
+      "level": {
+        "type": "keyword",
+        "index": true
+      },
+      "source": {
+        "type": "keyword",
+        "index": true
+      },
+      "browser": {
+        "type": "keyword"
+      },
+      "os": {
+        "type": "keyword"
+      },
+      "device": {
+        "type": "keyword"
+      },
+      "ip": {
+        "type": "ip"
+      },
+      "location": {
+        "type": "geo_point"
+      }
+    }
+  },
+  "settings": {
+    "number_of_shards": 3,
+    "number_of_replicas": 1,
+    "refresh_interval": "5s",
+    "index": {
+      "max_result_window": 50000
+    }
+  }
+}
+
+# elasticsearch.yml
+cluster.name: "logging-cluster"
+node.name: "logging-node-1"
+network.host: 0.0.0.0
+http.port: 9200
+transport.port: 9300
+
+# Discovery settings
+discovery.type: single-node
+cluster.initial_master_nodes: ["logging-node-1"]
+
+# Path settings
+path.data: /usr/share/elasticsearch/data
+path.logs: /usr/share/elasticsearch/logs
+
+# Memory settings
+bootstrap.memory_lock: false
+indices.memory.index_buffer_size: 20%
+
+# Security settings (basic)
+xpack.security.enabled: false
+xpack.monitoring.collection.enabled: true
+
+# Index settings
+action.auto_create_index: "+user-logs-*,+kibana*,+.monitoring-*,+.watches,+.watcher-history-*,+.ml-*"
+
+# HTTP settings
+http.cors.enabled: true
+http.cors.allow-origin: "*"
+http.cors.allow-headers: "X-Requested-With,Content-Type,Content-Length,Authorization"
+
+# Performance tuning
+indices.fielddata.cache.size: 40%
+indices.queries.cache.size: 20%
+thread_pool.write.queue_size: 1000
+thread_pool.search.queue_size: 1000
+
+# Index lifecycle management
+xpack.ilm.enabled: true
+
+# user-logs-template.json
+{
+  "index_patterns": ["user-logs-*"],
+  "template": {
+    "settings": {
+      "number_of_shards": 3,
+      "number_of_replicas": 1,
+      "refresh_interval": "5s",
+      "index": {
+        "lifecycle": {
+          "name": "user-logs-policy",
+          "rollover_alias": "user-logs"
+        },
+        "codec": "best_compression",
+        "max_result_window": 50000
+      }
+    },
+    "mappings": {
+      "properties": {
+        "userId": {
+          "type": "keyword",
+          "index": true
+        },
+        "sessionId": {
+          "type": "keyword",
+          "index": true
+        },
+        "eventName": {
+          "type": "keyword",
+          "index": true
+        },
+        "page": {
+          "type": "keyword",
+          "index": true
+        },
+        "timestamp": {
+          "type": "date",
+          "format": "strict_date_optional_time||epoch_millis"
+        },
+        "data": {
+          "type": "object",
+          "enabled": true,
+          "properties": {
+            "error": {
+              "type": "text",
+              "analyzer": "standard"
+            },
+            "stackTrace": {
+              "type": "text",
+              "index": false
+            },
+            "duration": {
+              "type": "long"
+            },
+            "url": {
+              "type": "keyword"
+            },
+            "component": {
+              "type": "keyword"
+            },
+            "metadata": {
+              "type": "object",
+              "enabled": true
+            }
+          }
+        },
+        "userAgent": {
+          "type": "text",
+          "analyzer": "standard",
+          "fields": {
+            "keyword": {
+              "type": "keyword",
+              "ignore_above": 256
+            }
+          }
+        },
+        "level": {
+          "type": "keyword",
+          "index": true
+        },
+        "source": {
+          "type": "keyword",
+          "index": true
+        },
+        "browser": {
+          "type": "keyword"
+        },
+        "os": {
+          "type": "keyword"
+        },
+        "device": {
+          "type": "keyword"
+        },
+        "ip": {
+          "type": "ip"
+        },
+        "location": {
+          "type": "geo_point"
+        }
+      }
+    }
+  },
+  "priority": 100,
+  "version": 1,
+  "_meta": {
+    "description": "Template for user logs from Angular application"
+  }
+}
