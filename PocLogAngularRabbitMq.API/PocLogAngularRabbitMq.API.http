@@ -1,0 +1,6 @@
+@PocLogAngularRabbitMq.API_HostAddress = http://localhost:5030
+
+GET {{PocLogAngularRabbitMq.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
