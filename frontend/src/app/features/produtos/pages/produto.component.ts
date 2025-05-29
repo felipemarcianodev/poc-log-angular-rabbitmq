@@ -1,13 +1,12 @@
 import { Component, Injector, OnInit } from '@angular/core';
 import { BaseLoggedComponent } from '../../../core/logging/components/base-logged.component';
 import { CommonModule } from '@angular/common';
-import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-produtos',
   standalone: true,
-  imports:[CommonModule, BrowserModule, RouterModule],
+  imports:[CommonModule, RouterModule],
   template: `
     <div class="produtos-layout">
       <header class="produtos-header">

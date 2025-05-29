@@ -1,4 +1,4 @@
-import { HTTP_INTERCEPTORS, HttpClient } from '@angular/common/http';,
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { APP_INITIALIZER, Component, ErrorHandler } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
 import { LoggingInterceptor } from './core/interceptors/logging.interceptor';

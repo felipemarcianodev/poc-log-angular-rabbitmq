@@ -7,14 +7,14 @@ import { TrackPerformance } from '../../../core/logging/decorators/performance-l
 import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { Produto } from '../models/produto.model';
-import { ProductService } from '../services/produto.service';
+import { ProdutoService } from '../services/produto.service';
 import { ProdutoCardComponent } from './produto-card.component';
 
 @Component({
   selector: 'app-produto-detalhe',
   standalone: true,
   imports:[CommonModule, BrowserModule, RouterModule, ProdutoCardComponent],
-  providers:[ProductService],
+  providers:[ProdutoService],
   template: `
     <div class="produto-detail" *ngIf="produto">
       <div class="produto-header">
@@ -149,7 +149,7 @@ export class ProdutoDetalheComponent extends BaseLoggedComponent implements OnIn
     injector: Injector,
     private route: ActivatedRoute,
     private router: Router,
-    private productService: ProductService
+    private productService: ProdutoService
   ) {
     super(injector);
   }
@@ -243,7 +243,7 @@ export class ProdutoDetalheComponent extends BaseLoggedComponent implements OnIn
       // Simular carregamento de recomendações
       await new Promise(resolve => setTimeout(resolve, Math.random() * 2000));
 
-      this.recommendations = await this.productService.getRecommendations(this.productId);
+      this.recommendations = await this.productService.getProdutos(this.productId);
 
       this.logAction('RECOMMENDATIONS_LOADED', {
         productId: this.productId,

@@ -5,9 +5,9 @@ import { ProdutoDetalheComponent } from "./components/produto-detalhe.component"
 
 export const routes: Routes = [
   {
-    path: 'produtos', component: ProdutoComponent,  canActivate: [LoggingRouteGuard],
+    path: '', component: ProdutoComponent,  canActivate: [LoggingRouteGuard],
     children: [
-      { path: 'produtos/detalhes', component: ProdutoDetalheComponent },
+      { path: 'detalhes', component: ProdutoDetalheComponent },
     ]
   }
 ];
